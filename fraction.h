@@ -25,13 +25,15 @@ public:
 
   //returns whole number
   int getWholeNumber();
-  
+
   //Returns the decimal value of the fraction
   double decimalValue();
 
   static void outputFormat(fractionType newType);
 
   void reduce();
+  int gcd(int a, int b);
+
 
   //overload << + - / * == = >>
   const fraction& operator=(const fraction& rightObject);

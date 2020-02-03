@@ -107,41 +107,14 @@ void fraction::outputFormat(fractionType newType) {
 
 
 //implementation of euclids algorithm
+int fraction::gcd(int a, int b)
+{
+    if (a == 0)
+        return b;
+    return fraction::gcd(b % a, a);
+}
 void fraction::reduce() {
-  int remainder, prevRemainder, a, b, q;
-
-  if (numerator > denominator) {
-    //throw error
-  } else {
-    a = denominator;
-    b = numerator;
-  }
-
-  bool first = true;
-  while (remainder > 0.00001) {
-    q = 0;
-
-    //finds the number of times b can be added until its bigger than a
-    while (b * q < a) {
-      q++;
-    }
-    if (!first || (numerator < denominator/2 && q ==2)) {
-      q--; //since we left the loop, q is bigger by 1
-    }
-
-    remainder = a - b * q;
-    if (first) {
-      first = false;
-      if (b >= a/2)
-        cout << "here" <<endl;
-        prevRemainder = a - b;
-    } else if (remainder > 0.00001){
-      prevRemainder = remainder;
-    }
-
-    a = b;
-    b = remainder;
-  }
+  int prevRemainder = gcd(numerator, denominator);
 
   numerator = numerator / prevRemainder;
   denominator = denominator / prevRemainder;
@@ -168,12 +141,18 @@ const fraction& fraction::operator=(double number) {
 ostream& operator<<(ostream& osObject, const fraction& fract) {
   //types
   if (fraction::outputType == fraction::improper) {
-    osObject << (fract.wholeNumber * fract.denominator + fract.numerator) << "/" << fract.denominator;
+    if (fract.denominator == 1) { //TODO FIX!!!
+      osObject << fract.wholeNumber + fract.numerator;
+    } else {
+      osObject << (fract.wholeNumber * fract.denominator + fract.numerator) << "/" << fract.denominator;
+    }
   } else if (fraction::outputType == fraction::decimal) {
     osObject << fract.wholeNumber + ((double) fract.numerator / fract.denominator);
   } else {
     if (fract.wholeNumber == 0) {
       osObject << " " << fract.numerator << "/" << fract.denominator;
+    } else if (fract.denominator == 1) { //TODO FIX!!!
+      osObject << fract.wholeNumber + fract.numerator;
     } else {
       osObject << fract.wholeNumber << " " << fract.numerator << "/" << fract.denominator;
     }
@@ -218,7 +197,7 @@ bool fraction::operator==(int number) {
 }
 
 bool fraction::operator<(int number) {
-  return (number < decimalValue());
+  return (number > decimalValue());
 }
 
 
