@@ -1,0 +1,63 @@
+<HTML>
+<head>
+   <style type = "text/css">
+      a  { text-decoration: none;
+           color: blue;
+           font-weight: bold }
+      a:hover  { background-color: blue;
+                 color: white }
+   </style>
+<TITLE>Logistics for Creating and Handing in Programs</TITLE>
+</head>
+<BODY>
+<H3>Creating Your Program</H3>
+You are free to create your programs using any platform and any compiler
+you wish, but what you hand in must meet the following restrictions.
+<ul>
+<li>All files for the program are contained in a directory called
+    <b><i>lastname#</i></b> where lastname is your last name and # is the
+    assignment number.  For example, if I were creating assignment 5, I
+    would start by making a directory called <b><i>brekke5</i></b>
+<li>Your program must compile and link on <i>smaug</i> as that is where
+    I will grade your program.  
+<li>Your directory will contain a <i>makefile</i>
+    that takes care of all the details of compiling and linking.
+</ul>
+<H3>Handing in Your Program</H3>
+<p>Make a gzip compressed archive of the directory containing your program 
+   and hand it in to the dropbox on D2L.
+   If you discover an error after you have turned in the
+   assignment, you can hand in another version on D2L (only your last
+   submission is kept).
+   The name of the compressed archive 
+   should be <b><i>lastname#.tar.gz</i></b> where
+   lastname is your last name and # is the assignment number.  Using the
+   same example as above of me creating assignment 5, I would create
+   <b><i>brekke5.tar.gz</i></b> (which contains the directory
+   <b><i>brekke5</i></b>, which contains the files of the program).
+   What follows are directions for creating the compressed archive you
+   are to handin. This
+   example shows assignment 5 which would change dependent on the assignment
+   number.  Also, you would substitute your last name for <i>lastname</i>).
+   <ol>
+   <li>Change to the directory that contains your assignment directory. Note:
+    if you type <i><b>ls</b></i> you should be able to see your directory
+    <b>lastname5</b> in the file list (not the contents of the directory).
+   <li>Issue the command: 
+    <b>tar&nbsp; cvzf&nbsp; lastname5.tar.gz&nbsp; lastname5</b> at the
+    command prompt.  The command
+    reads as follows: "tar" is for "tape archive" (an old UNIX command), 
+    "c" is for create, "v" is for verbose (so you can see the file names
+    added to the archive), "z" means to compress it in gzip format, 
+    "f" means the file name to create is the next word, 
+    "lastname5.tar.gz" is the name of the
+    file to create, and "lastname5" is what goes into the archive (the
+    directory containing your program).
+<li>To check to see that everything has been correctly archived and
+    compressed, issue the command: <b>tar tvzf lastname5.tar.gz</b> and the
+    list of files will be displayed.  If you would ever want to uncompress
+    and unarchive such a file, the command is <b>tar xvzf lastname5.tar.gz</b>
+    (where the 'x' is extract).
+</ol>
+</BODY>
+</HTML>

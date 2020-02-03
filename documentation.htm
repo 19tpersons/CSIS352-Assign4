@@ -1,0 +1,233 @@
+<html>
+<head>
+   <title>Program Submission Requirements</title>
+   <style type = "text/css">
+      a  { text-decoration: none;
+           color: blue;
+           font-weight: bold }
+      a:hover  { background-color: blue;
+                 color: white }
+   </style>
+</head>
+<body text="#000000" bgcolor="#FFFFFF">
+
+<h1 align="center">Program Requirements</h1>
+<p>
+Each program that you hand in should follow the below requirements.
+Failure to do so will result in loss of points, oftentimes lots of points.
+</p>
+
+<h3>Organization</h3>
+<ul>
+<li>Your program will be modularized
+    <ul>
+    <li>Functions will go in separate files and will be compiled
+        individually and linked into the final solution.  Closely
+        related functions can go in the same file (for example:
+        a swap function that goes with a sort function).
+    <li>Classes will put in separate files with the specification
+        in a .h file and the implementation in a .cpp file.  Classes
+        will be compiled individually (except in the case of
+        templated classes) and linked into the final solution.
+    <li>Your main function will be in the file <i>main.cpp</i> and
+        is usually the only function in that file.  The main
+        function should not be excessive in length and will be
+        used to call other functions and class methods.  There
+        should be little implementation detail in the main function.
+    </ul>
+<li>All variables, constants, functions, structs, classes, methods, etc.
+    should have descriptive names.
+<li>You must use indentation to make your program readable.  I suggest
+    using 3 or 4 spaces.  Using the tab key is TOO MUCH and using less
+    than 3 spaces is NOT ENOUGH.
+<li>You must be consistent.  The number of spaces for indentation should
+    be the same throughout your solution.  Each control structure must
+    look the same.  For example, if you use curly braces on separate
+    lines that are lined up with the control structure, this should
+    be the same for all control structures.
+<li>Functions and methods are for performing a single task.  For example
+    a function should not find the sum of an array and output the sum.
+    Instead the function should return the sum to the calling function
+    and then it can be output.  Otherwise, any time the sum function is
+    called, it would output the value.  This promotes reusability of code.
+    I've seen too many functions written by students that perform a 
+    task, then outputs the result.  In general, a function should not
+    write any output (except debugging output that will later be removed)
+    unless the specific task of the function is for output.
+</ul>
+<h3>Program Packaging</h3>
+<p>Unless specifically requested in an assignment, always do the following.
+<ul>
+<li>Put your program in a separate directory called lastname# where 
+    lastname is your lastname and # is the assignment number.
+<li>The main function for you program is in the file <i>main.cpp</i>.
+    The assignment description may also contain other file naming requirements.
+<li>You must create a makefile that will handle all the details of
+    compiling and linking your program.
+    <ul>
+    <li>Click <a href="makefile">here</a> for an example makefile
+    <li>The makefile will produce an executable called prog# where
+        # is the assignment number. For example, if you are working on
+        assignment 5, your executable will be <i>prog5</i>
+    <li>The makefile will contain a <i>clean</i> option that will remove
+        core files, object files and the executable.  You should use this
+        option (<i>make clean</i>) before tarring and compressing your
+        program to hand in.
+    <li>Your makefile should contain macros for
+        <pre>
+        CC = g++
+        LFLAGS =
+        CFLAGS = (this is where you can use the -g flag during debug). 
+        </pre>
+    <li>Your makefile should have the correct dependencies
+    </ul>
+</ul>
+</p>
+
+<h3>Documentation</h3>
+<ul>
+<li>Each file in your distribution will contain documentation
+    <ul>
+    <li>An identification block at the top of every file (except data files)
+        identifying the author (usually you),
+        filename (so you know what it is when it is printed), date
+        created and modified (if applicable), class and assignment
+        for which the file was created.
+    <li>A file description block in every file (except data files).  
+        This gives a general description
+        of the contents of the file.  For example, "This file contains
+        the ____ function that will _____," or "This file contains
+        the implementation for the ____ class..." or "This file contains
+        the specification for the ____ class.  The class is used to ____."
+    <li>If the file contains a function (again, usually one function per file)
+        <ul>
+        <li>Give a list of preconditions (what is true before the 
+            function executes) and postconditions (what is true after
+            the function executes).
+        <li>Give a description of each function argument.
+        <li>Each variable declared in the function will also contain
+            a brief description.
+        </ul>
+    <li>If the file contains a class specification
+        <ul>
+        <li>Each class member is described when it is declared.  
+            This includes both methods and variables.
+        <li>Methods will also include preconditions, postconditions,
+            method input, and method output.  Click
+            <a href="circle.h">HERE</a> for an example.
+        </ul>
+    <li>If the file contains a class implementation, each method will
+        be preceded by a brief description.
+    <li>In addition to the above, there should be comments sprinkled
+        throughout your code describing what is going on when appropriate.
+        In general, the longer the function, the more comments there
+        should be.  If the code is self descriptive, it does not require
+        furthur commenting.
+    </ul>
+<li>There will be a file called <i><b>README</b></i> (capitalized so that it
+    stands out and no file extension) that contains the following
+    <ul>
+    <li>A good description of what the program is to do.  
+    <li>A good description of input and output.  This should
+        include a description of what the input is (whether it it from
+        a file or the keyboard), how it should be formatted and the
+        end condition for the input.  It will also include a description of
+        what output is produced (file or screen) and how it is formatted.
+        If command line arguments are used, they should be described.
+    <li>A good description of program design (obviously, the more complex
+        the program, the better the description should be).  This should
+        include which data structures, ADTs, inheritance, etc. are used,
+        and any known algorithms used (for example, don't just say search,
+        say linear search or binary search).
+    <li>A listing of each file in the distribution and what it contains
+        with a brief description of what it does.  This should be organized
+        so that it is neat and easy to read.  For example
+        <pre>
+        file             function           description
+        --------------   -----------------  ----------------------
+        main.cpp         main               main function
+
+        constants.h      declarations       declares contants
+
+        sort.cpp         sort               templated sort function
+                         swap               used by sort function
+
+        circle.h         circle             circle class specification
+
+        circle.cpp       circle methods     circle class implementation
+
+        etc.
+        </pre>
+    <li>Describe exactly what you did to test your program.  Include what
+        data sets you used, what error conditions you tested for, etc.
+        Program testing
+        is one of THE most important parts of the development process and
+        often one of the most overlooked.  Not thoroughly testing your
+        program is laziness and will result in lost points as I
+        uncover errors that you should have uncovered and corrected.
+    <li>Describe any bugs that remain in your program.  If I find
+        a bug that you did not report, I will deduct more points for it
+        than if you reported it.  Bugs should not be so significant that
+        it makes the program useless.
+    <li>Will it take substantial effort and time to create this 
+        <b><i>README</i></b> file?  YES
+    </ul>
+</ul>
+<h3>Handing In Your Program</h3>
+<p>You are free to write your program on any platform you wish but the
+final product must compile and execute on the platform required
+by the class (currently smaug).  Be sure that you have thoroughly tested
+your program.  
+Do NOT turn in any program that does not compile and link, or any
+    program where the results of execution are not close to the expectations
+    of the program.  This wastes my time since I will not be able to grade
+    it.  Turning in such a program will result in major point loss from
+    your final grade on the assignment, assuming you turn in a working
+    version of it later.
+See this <a href="handingin.htm">HANDOUT</a> for a description.</p>
+<h3>Penalties</h3>
+<ul>
+<li>Programs are due at the beginning of class on the due date.  A program
+that is turned in 1 minute past the start of class is considered late.
+Penalties for late programs are 10% for 1 day late, 25% for 2 days late,
+and 40% for 3 days late.  Programs will not be accepted past 3 days late
+without prior approval (which would include a significant explanation as to
+why the program has not been completed).  If you ask me, "can I turn the 
+program in late?"  My answer will always be "yes" but expect to be penalized.
+I will give program extensions without penalty (or minor penalty) in certain
+cases that you have discussed with me in advance.  Getting an extension after
+or near the due date will incur penalty.
+<li>You will be significantly penalized for the following
+    <ul>
+    <li>Not following directions.  This includes not following file naming 
+        conventions given in this document and in the assignment description,
+        not following documentation guidelines described above, not 
+        providing a correct and working makefile, etc.
+    <li>Compiler warning messages
+    <li>Errors in your program.  This shows that you did not thoroughly
+        test your program.
+    <li>Not following guidelines or restrictions given in the assignment.
+    <li>etc.
+    </ul>
+</ul>
+<h3>Final Notes</h3>
+</ul>
+<p>Consider me your client and yourself a freelance programmer.  You will 
+give me exactly what I am asking for or you won't get fully paid 
+(in points for the assignment).  Unfortunately, in the world of computer 
+programming, you don't get paid for effort, you get paid for results.
+You should always meet and/or exceed expectations.</p>
+<p>The downside of computer programming assignments compared to written
+assignments is that it is difficult to give partial credit to non-working
+programs, even though you have put in a lot of effort.  The upside is
+that if you thoroughly test your program, you KNOW that you will receive
+full credit for it.  You don't know what you will get on written assignments
+until you get your graded assignment back!
+</p>
+<p>You would be wise to re-read the assignment sheets multiple times
+before, during, and after program creation to make sure you are doing
+everything that is required.  I hear too many times from students, "oops,
+I forgot to do that."
+
+</body>
+</html>
