@@ -3,7 +3,7 @@
 using namespace std;
 
 class fraction {
-  friend ostream& operator<<(ostream&, const fraction&);
+  friend ostream& operator<<(ostream&, fraction&);
   friend istream& operator>>(istream&, fraction&);
 public:
   enum fractionType {improper, decimal, mixed};
@@ -17,8 +17,12 @@ public:
   //sets the denominator
   void setDenominator(int number);
 
-  //Returns numerator
+  //Returns numerator when the output is assumed to be improper
   int getNumerator();
+
+  //used to get the numerator when the output is assumed to be mixed
+  int getNumerator(bool mixed);
+
 
   //Returns denominator
   int getDenominator();

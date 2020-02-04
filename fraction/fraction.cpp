@@ -23,12 +23,11 @@ fraction::fraction(int numerator, int denominator) {
 void fraction::setFraction(int n, int d) {
   numerator = n;
   denominator = d;
-  while (numerator > denominator) {
+  while (numerator >= denominator) {
     wholeNumber += 1;
     numerator -= d;
   }
 
-  reduce();
 }
 
 void fraction::setFraction(double number) {
@@ -78,6 +77,29 @@ void fraction::setDenominator(int number) {
 }
 
 int fraction::getNumerator() {
+  bool negative = false;
+
+  int tmpWhole = wholeNumber;
+  int answer;
+  if (wholeNumber < 0) {
+    negative = true;
+    tmpWhole *= -1;
+  }
+
+  if (denominator == 1) {
+    answer =  tmpWhole + numerator;
+  } else {
+    answer =  tmpWhole * denominator + numerator;
+  }
+
+  if (negative) {
+    answer *= -1;
+  }
+
+  return answer;
+}
+
+int fraction::getNumerator(bool mixed) {
   return numerator;
 }
 
@@ -138,21 +160,23 @@ const fraction& fraction::operator=(double number) {
 }
 
 
-ostream& operator<<(ostream& osObject, const fraction& fract) {
+ostream& operator<<(ostream& osObject, fraction& fract) {
   //types
   if (fraction::outputType == fraction::improper) {
-    if (fract.denominator == 1) { //TODO FIX!!!
+    if (fract.denominator == 1) {
       osObject << fract.wholeNumber + fract.numerator;
     } else {
-      osObject << (fract.wholeNumber * fract.denominator + fract.numerator) << "/" << fract.denominator;
+      osObject << fract.getNumerator() << "/" << fract.denominator;
     }
   } else if (fraction::outputType == fraction::decimal) {
     osObject << fract.wholeNumber + ((double) fract.numerator / fract.denominator);
-  } else {
+  } else { //mixed number
     if (fract.wholeNumber == 0) {
       osObject << " " << fract.numerator << "/" << fract.denominator;
     } else if (fract.denominator == 1) { //TODO FIX!!!
       osObject << fract.wholeNumber + fract.numerator;
+    } else if(fract.numerator == 0) {
+      osObject << fract.wholeNumber;
     } else {
       osObject << fract.wholeNumber << " " << fract.numerator << "/" << fract.denominator;
     }
@@ -213,8 +237,9 @@ fraction fraction::operator+(const fraction& rightObject) const {
   sum.numerator = tmpNumerator;
   sum.denominator = tmpDenominator;
   fraction tmp(tmpNumerator, tmpDenominator);
+  tmp.reduce();
 
-  sum.numerator = tmp.getNumerator();
+  sum.numerator = tmp.getNumerator(true);
   sum.denominator = tmp.getDenominator();
   sum.wholeNumber += tmp.getWholeNumber();
 
